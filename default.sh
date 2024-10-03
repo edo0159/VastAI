@@ -193,16 +193,35 @@ function provisioning_print_end() {
 
 # Download from $1 URL to $2 file path
 function provisioning_download() {
+    # 認証トークンが必要かどうかを確認
     if [[ -n $HF_TOKEN && $1 =~ ^https://([a-zA-Z0-9_-]+\.)?huggingface\.co(/|$|\?) ]]; then
         auth_token="$HF_TOKEN"
     elif [[ -n $CIVITAI_TOKEN && $1 =~ ^https://([a-zA-Z0-9_-]+\.)?civitai\.com(/|$|\?) ]]; then
         auth_token="$CIVITAI_TOKEN"
-    fi
-    if [[ -n $auth_token ]];then
-        wget --header="Authorization: Bearer $auth_token" -qnc --content-disposition --show-progress -e dotbytes="${3:-4M}" -P "$2" "$1"
     else
-        wget -qnc --content-disposition --show-progress -e dotbytes="${3:-4M}" -P "$2" "$1"
+        auth_token=""
     fi
+
+    # ダウンロード先のディレクトリとURLを取得
+    url="$1"
+    download_dir="$2"
+
+    # ダウンロード先ディレクトリを作成
+    mkdir -p "$download_dir"
+
+    # ダウンロード先ディレクトリに移動
+    pushd "$download_dir" > /dev/null
+
+    # curlコマンドを実行
+    if [[ -n $auth_token ]]; then
+        curl -L -H "Authorization: Bearer $auth_token" -O -J --progress-bar "$url"
+    else
+        curl -L -O -J --progress-bar "$url"
+    fi
+
+    # 元のディレクトリに戻る
+    popd > /dev/null
 }
+
 
 provisioning_start
