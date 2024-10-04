@@ -25,6 +25,7 @@ EXTENSIONS=(
     "https://github.com/AlUlkesh/stable-diffusion-webui-images-browser"
     "https://github.com/hako-mikan/sd-webui-regional-prompter"
     "https://github.com/Coyote-A/ultimate-upscale-for-automatic1111"
+	"https://github.com/butaixianran/Stable-Diffusion-Webui-Civitai-Helper"
 )
 
 CHECKPOINT_MODELS=(
@@ -40,6 +41,7 @@ LORA_MODELS=(
 	"https://civitai.com/api/download/models/420630?type=Model&format=SafeTensor"
 	"https://civitai.com/api/download/models/460597?type=Model&format=SafeTensor"
 	"https://civitai.com/api/download/models/658463?type=Model&format=SafeTensor"
+	"https://civitai.com/api/download/models/326346?type=Model&format=SafeTensor"
 )
 
 VAE_MODELS=(
