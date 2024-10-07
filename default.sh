@@ -31,7 +31,9 @@ EXTENSIONS=(
 CHECKPOINT_MODELS=(
     #"https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/v1-5-pruned-emaonly.ckpt"
     #"https://huggingface.co/stabilityai/stable-diffusion-2-1/resolve/main/v2-1_768-ema-pruned.ckpt"
-	"https://civitai.com/api/download/models/575495?type=Model&format=SafeTensor&size=pruned&fp=bf16"
+	#Hassaku XL
+	#"https://civitai.com/api/download/models/575495?type=Model&format=SafeTensor&size=pruned&fp=bf16" 
+	"https://civitai.com/api/download/models/920368?type=Model&format=SafeTensor&size=full&fp=fp16"
 )
 
 LORA_MODELS=(
@@ -42,6 +44,10 @@ LORA_MODELS=(
 	"https://civitai.com/api/download/models/460597?type=Model&format=SafeTensor"
 	"https://civitai.com/api/download/models/658463?type=Model&format=SafeTensor"
 	"https://civitai.com/api/download/models/326346?type=Model&format=SafeTensor"
+	"https://civitai.com/api/download/models/551424?type=Model&format=SafeTensor"
+	"https://civitai.com/api/download/models/662992?type=Model&format=SafeTensor"
+	"https://civitai.com/api/download/models/422367?type=Model&format=SafeTensor"
+	"https://civitai.com/api/download/models/860001?type=Model&format=SafeTensor"
 )
 
 VAE_MODELS=(
