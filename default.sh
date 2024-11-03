@@ -33,7 +33,10 @@ CHECKPOINT_MODELS=(
     #"https://huggingface.co/stabilityai/stable-diffusion-2-1/resolve/main/v2-1_768-ema-pruned.ckpt"
 	#Hassaku XL
 	#"https://civitai.com/api/download/models/575495?type=Model&format=SafeTensor&size=pruned&fp=bf16" 
+	#boleromix(Pony)
 	"https://civitai.com/api/download/models/920368?type=Model&format=SafeTensor&size=full&fp=fp16"
+	#NoobAI-XL (NAI-XL)
+	"https://civitai.com/api/download/models/998979?type=Model&format=SafeTensor&size=full&fp=fp16"
 )
 
 LORA_MODELS=(
