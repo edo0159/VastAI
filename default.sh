@@ -35,22 +35,20 @@ CHECKPOINT_MODELS=(
 	#"https://civitai.com/api/download/models/575495?type=Model&format=SafeTensor&size=pruned&fp=bf16" 
 	#boleromix(Pony)
 	"https://civitai.com/api/download/models/920368?type=Model&format=SafeTensor&size=full&fp=fp16"
-	#NoobAI-XL (NAI-XL)
-	"https://civitai.com/api/download/models/998979?type=Model&format=SafeTensor&size=full&fp=fp16"
 )
 
 LORA_MODELS=(
     #"https://civitai.com/api/download/models/16576"
-	"https://civitai.com/api/download/models/766438?type=Model&format=SafeTensor"
-	"https://civitai.com/api/download/models/401755?type=Model&format=SafeTensor"
-	"https://civitai.com/api/download/models/420630?type=Model&format=SafeTensor"
-	"https://civitai.com/api/download/models/460597?type=Model&format=SafeTensor"
-	"https://civitai.com/api/download/models/658463?type=Model&format=SafeTensor"
-	"https://civitai.com/api/download/models/326346?type=Model&format=SafeTensor"
-	"https://civitai.com/api/download/models/551424?type=Model&format=SafeTensor"
-	"https://civitai.com/api/download/models/662992?type=Model&format=SafeTensor"
-	"https://civitai.com/api/download/models/422367?type=Model&format=SafeTensor"
-	"https://civitai.com/api/download/models/860001?type=Model&format=SafeTensor"
+	#"https://civitai.com/api/download/models/766438?type=Model&format=SafeTensor"
+	#"https://civitai.com/api/download/models/401755?type=Model&format=SafeTensor"
+	#"https://civitai.com/api/download/models/420630?type=Model&format=SafeTensor"
+	#"https://civitai.com/api/download/models/460597?type=Model&format=SafeTensor"
+	#"https://civitai.com/api/download/models/658463?type=Model&format=SafeTensor"
+	#"https://civitai.com/api/download/models/326346?type=Model&format=SafeTensor"
+	#"https://civitai.com/api/download/models/551424?type=Model&format=SafeTensor"
+	#"https://civitai.com/api/download/models/662992?type=Model&format=SafeTensor"
+	#"https://civitai.com/api/download/models/422367?type=Model&format=SafeTensor"
+	#"https://civitai.com/api/download/models/860001?type=Model&format=SafeTensor"
 )
 
 VAE_MODELS=(
@@ -68,7 +66,7 @@ ESRGAN_MODELS=(
 CONTROLNET_MODELS=(
     #"https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/diffusers_xl_canny_mid.safetensors"
     #"https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/diffusers_xl_depth_mid.safetensors?download"
-    "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/t2i-adapter_diffusers_xl_openpose.safetensors"
+    #"https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/t2i-adapter_diffusers_xl_openpose.safetensors"
     #"https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_canny-fp16.safetensors"
     #"https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_depth-fp16.safetensors"
     #"https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_hed-fp16.safetensors"
