@@ -35,6 +35,8 @@ CHECKPOINT_MODELS=(
 	#"https://civitai.com/api/download/models/575495?type=Model&format=SafeTensor&size=pruned&fp=bf16" 
 	#boleromix(Pony)
 	"https://civitai.com/api/download/models/920368?type=Model&format=SafeTensor&size=full&fp=fp16"
+	#noob ai pred 1.0
+	"https://civitai.com/api/download/models/1022833?type=Model&format=SafeTensor&size=full&fp=fp16"
 )
 
 LORA_MODELS=(
