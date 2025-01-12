@@ -5,7 +5,7 @@
 # https://raw.githubusercontent.com/ai-dock/stable-diffusion-webui/main/config/provisioning/default.sh
 
 ### Edit the following arrays to suit your workflow - values must be quoted and separated by newlines or spaces.
-### If you specify gated models you'll need to set environment variables HF_TOKEN and/orf CIVITAI_TOKEN
+### If you specify gated models you'll need to set environment variables HF_TOKEN and/or CIVITAI_TOKEN
 
 DISK_GB_REQUIRED=30
 
@@ -25,34 +25,34 @@ EXTENSIONS=(
     "https://github.com/AlUlkesh/stable-diffusion-webui-images-browser"
     "https://github.com/hako-mikan/sd-webui-regional-prompter"
     "https://github.com/Coyote-A/ultimate-upscale-for-automatic1111"
-	"https://github.com/butaixianran/Stable-Diffusion-Webui-Civitai-Helper"
-	"https://github.com/Bing-su/adetailer"
+    "https://github.com/butaixianran/Stable-Diffusion-Webui-Civitai-Helper"
+    "https://github.com/Bing-su/adetailer"
 )
 
 CHECKPOINT_MODELS=(
     #"https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/v1-5-pruned-emaonly.ckpt"
     #"https://huggingface.co/stabilityai/stable-diffusion-2-1/resolve/main/v2-1_768-ema-pruned.ckpt"
-	#Hassaku XL
-	#"https://civitai.com/api/download/models/575495?type=Model&format=SafeTensor&size=pruned&fp=bf16" 
-	#Illustrious-XL　0.1
-	"https://civitai.com/api/download/models/889818?type=Model&format=SafeTensor&size=pruned&fp=fp16"
-	#noob ai pred 1.0
-	"https://civitai.com/api/download/models/1022833?type=Model&format=SafeTensor&size=full&fp=fp16"
-	#NTR MIX XIII
-	"https://civitai.com/api/download/models/1166878?type=Model&format=SafeTensor&size=pruned&fp=fp16"
+    # Hassaku XL
+    #"https://civitai.com/api/download/models/575495?type=Model&format=SafeTensor&size=pruned&fp=bf16"
+    # Illustrious-XL 0.1
+    "https://civitai.com/api/download/models/889818?type=Model&format=SafeTensor&size=pruned&fp=fp16"
+    # noob ai pred 1.0
+    "https://civitai.com/api/download/models/1022833?type=Model&format=SafeTensor&size=full&fp=fp16"
+    # NTR MIX XIII
+    "https://civitai.com/api/download/models/1166878?type=Model&format=SafeTensor&size=pruned&fp=fp16"
 )
 
 LORA_MODELS=(
-	#NAXX IL
+    # NAXX IL
     "https://civitai.com/api/download/models/1250658?type=Model&format=SafeTensor"
-	#朝凪 IL
-	"https://civitai.com/api/download/models/1186504?type=Model&format=SafeTensor"
-	#nyalia IL
-	"https://civitai.com/api/download/models/1123781?type=Model&format=SafeTensor"
-	#Bishoujo Mangekyou IL
-	"https://civitai.com/api/download/models/521833?type=Model&format=SafeTensor"
-	#anmi
-	"https://civitai.com/api/download/models/1021992?type=Model&format=SafeTensor"
+    # 朝凪 IL
+    "https://civitai.com/api/download/models/1186504?type=Model&format=SafeTensor"
+    # nyalia IL
+    "https://civitai.com/api/download/models/1123781?type=Model&format=SafeTensor"
+    # Bishoujo Mangekyou IL
+    "https://civitai.com/api/download/models/521833?type=Model&format=SafeTensor"
+    # anmi
+    "https://civitai.com/api/download/models/1021992?type=Model&format=SafeTensor"
 )
 
 VAE_MODELS=(
@@ -132,11 +132,10 @@ function provisioning_start() {
     
     # Start and exit because webui will probably require a restart
     cd /opt/stable-diffusion-webui-forge
-        source "$FORGE_VENV/bin/activate"
-        LD_PRELOAD=libtcmalloc.so python launch.py \
-            ${ARGS_COMBINED}
-        deactivate
-
+    source "$FORGE_VENV/bin/activate"
+    LD_PRELOAD=libtcmalloc.so python launch.py \
+        ${ARGS_COMBINED}
+    deactivate
 
     provisioning_print_end
 }
@@ -147,13 +146,13 @@ function pip_install() {
 
 function provisioning_get_apt_packages() {
     if [[ -n $APT_PACKAGES ]]; then
-            sudo $APT_INSTALL ${APT_PACKAGES[@]}
+        sudo $APT_INSTALL ${APT_PACKAGES[@]}
     fi
 }
 
 function provisioning_get_pip_packages() {
     if [[ -n $PIP_PACKAGES ]]; then
-            pip_install ${PIP_PACKAGES[@]}
+        pip_install ${PIP_PACKAGES[@]}
     fi
 }
 
@@ -174,25 +173,51 @@ function provisioning_get_extensions() {
     done
 }
 
+###############################################################################
+# ★★ ここから並列ダウンロード化した部分 ★★
+###############################################################################
 function provisioning_get_models() {
-    if [[ -z $2 ]]; then return 1; fi
+    if [[ -z $2 ]]; then
+        return 1
+    fi
+    
     dir="$1"
     mkdir -p "$dir"
     shift
+
+    # ディスク容量をチェックし、一部のみダウンロードするかを判定
     if [[ $DISK_GB_ALLOCATED -ge $DISK_GB_REQUIRED ]]; then
         arr=("$@")
     else
         printf "WARNING: Low disk space allocation - Only the first model will be downloaded!\n"
         arr=("$1")
     fi
-    
+
     printf "Downloading %s model(s) to %s...\n" "${#arr[@]}" "$dir"
+
+    # 並列でダウンロードするためのコマンドリストを作成
+    local commands=()
     for url in "${arr[@]}"; do
-        printf "Downloading: %s\n" "${url}"
-        provisioning_download "${url}" "${dir}"
-        printf "\n"
+        # シングルクォートのエスケープに注意
+        commands+=("provisioning_download '${url}' '${dir}'")
     done
+
+    # provisioning_download 関数をサブシェルでも認識できるようにエクスポート
+    export -f provisioning_download
+
+    # ※トークンをサブシェルでも使いたい場合は必要に応じて下記をアンコメント
+    # export HF_TOKEN
+    # export CIVITAI_TOKEN
+
+    # コマンドを xargs に流し込み、最大5プロセスで並列実行
+    # -0 と printf '%s\0' を使うことで、URLにスペースなどがあっても安全に扱える
+    printf '%s\0' "${commands[@]}" \
+      | xargs -0 -P 5 -I {} bash -c '{}'
 }
+
+###############################################################################
+# ↑ ここまで並列ダウンロード化した部分 ↑
+###############################################################################
 
 function provisioning_print_header() {
     printf "\n##############################################\n#                                            #\n#          Provisioning container            #\n#                                            #\n#         This will take some time           #\n#                                            #\n# Your container will be ready on completion #\n#                                            #\n##############################################\n\n"
@@ -204,7 +229,6 @@ function provisioning_print_header() {
 function provisioning_print_end() {
     printf "\nProvisioning complete:  Web UI will start now\n\n"
 }
-
 
 # Download from $1 URL to $2 file path
 function provisioning_download() {
@@ -237,6 +261,5 @@ function provisioning_download() {
     # 元のディレクトリに戻る
     popd > /dev/null
 }
-
 
 provisioning_start
