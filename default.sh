@@ -21,11 +21,12 @@ PIP_PACKAGES=(
 EXTENSIONS=(
     "https://github.com/deforum-art/sd-webui-deforum"
     "https://github.com/adieyal/sd-dynamic-prompts"
-    "https://github.com/ototadana/sd-face-editor"
+    #"https://github.com/ototadana/sd-face-editor"
     "https://github.com/AlUlkesh/stable-diffusion-webui-images-browser"
     "https://github.com/hako-mikan/sd-webui-regional-prompter"
     "https://github.com/Coyote-A/ultimate-upscale-for-automatic1111"
 	"https://github.com/butaixianran/Stable-Diffusion-Webui-Civitai-Helper"
+	"https://github.com/Bing-su/adetailer"
 )
 
 CHECKPOINT_MODELS=(
@@ -37,13 +38,21 @@ CHECKPOINT_MODELS=(
 	"https://civitai.com/api/download/models/889818?type=Model&format=SafeTensor&size=pruned&fp=fp16"
 	#noob ai pred 1.0
 	"https://civitai.com/api/download/models/1022833?type=Model&format=SafeTensor&size=full&fp=fp16"
+	#NTR MIX XIII
+	"https://civitai.com/api/download/models/1166878?type=Model&format=SafeTensor&size=pruned&fp=fp16"
 )
 
 LORA_MODELS=(
-	#NAXX
+	#NAXX IL
     "https://civitai.com/api/download/models/1250658?type=Model&format=SafeTensor"
-	#朝凪
+	#朝凪 IL
 	"https://civitai.com/api/download/models/1186504?type=Model&format=SafeTensor"
+	#nyalia IL
+	"https://civitai.com/api/download/models/1123781?type=Model&format=SafeTensor"
+	#Bishoujo Mangekyou IL
+	"https://civitai.com/api/download/models/521833?type=Model&format=SafeTensor"
+	#anmi
+	"https://civitai.com/api/download/models/1021992?type=Model&format=SafeTensor"
 )
 
 VAE_MODELS=(
