@@ -33,24 +33,17 @@ CHECKPOINT_MODELS=(
     #"https://huggingface.co/stabilityai/stable-diffusion-2-1/resolve/main/v2-1_768-ema-pruned.ckpt"
 	#Hassaku XL
 	#"https://civitai.com/api/download/models/575495?type=Model&format=SafeTensor&size=pruned&fp=bf16" 
-	#boleromix(Pony)
-	"https://civitai.com/api/download/models/920368?type=Model&format=SafeTensor&size=full&fp=fp16"
+	#Illustrious-XL　0.1
+	"https://civitai.com/api/download/models/889818?type=Model&format=SafeTensor&size=pruned&fp=fp16"
 	#noob ai pred 1.0
 	"https://civitai.com/api/download/models/1022833?type=Model&format=SafeTensor&size=full&fp=fp16"
 )
 
 LORA_MODELS=(
-    #"https://civitai.com/api/download/models/16576"
-	#"https://civitai.com/api/download/models/766438?type=Model&format=SafeTensor"
-	#"https://civitai.com/api/download/models/401755?type=Model&format=SafeTensor"
-	#"https://civitai.com/api/download/models/420630?type=Model&format=SafeTensor"
-	#"https://civitai.com/api/download/models/460597?type=Model&format=SafeTensor"
-	#"https://civitai.com/api/download/models/658463?type=Model&format=SafeTensor"
-	#"https://civitai.com/api/download/models/326346?type=Model&format=SafeTensor"
-	#"https://civitai.com/api/download/models/551424?type=Model&format=SafeTensor"
-	#"https://civitai.com/api/download/models/662992?type=Model&format=SafeTensor"
-	#"https://civitai.com/api/download/models/422367?type=Model&format=SafeTensor"
-	#"https://civitai.com/api/download/models/860001?type=Model&format=SafeTensor"
+	#NAXX
+    "https://civitai.com/api/download/models/1250658?type=Model&format=SafeTensor"
+	#朝凪
+	"https://civitai.com/api/download/models/1186504?type=Model&format=SafeTensor"
 )
 
 VAE_MODELS=(
