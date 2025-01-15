@@ -41,6 +41,8 @@ CHECKPOINT_MODELS=(
     "https://civitai.com/api/download/models/1022833?type=Model&format=SafeTensor&size=full&fp=fp16"
     # NTR MIX XIII
     "https://civitai.com/api/download/models/1166878?type=Model&format=SafeTensor&size=pruned&fp=fp16"
+	# Obsession (Illustrious-XL)
+	"https://civitai.com/api/download/models/1136462?type=Model&format=SafeTensor&size=pruned&fp=fp16"
 )
 
 LORA_MODELS=(
@@ -52,8 +54,10 @@ LORA_MODELS=(
     "https://civitai.com/api/download/models/1123781?type=Model&format=SafeTensor"
     # Bishoujo Mangekyou IL
     "https://civitai.com/api/download/models/521833?type=Model&format=SafeTensor"
-    # anmi
+    # anmi IL
     "https://civitai.com/api/download/models/1021992?type=Model&format=SafeTensor"
+	# WLOP IL
+	"https://civitai.com/api/download/models/1276600?type=Model&format=SafeTensor"
 )
 
 VAE_MODELS=(
