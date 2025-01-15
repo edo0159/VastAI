@@ -27,6 +27,7 @@ EXTENSIONS=(
     "https://github.com/Coyote-A/ultimate-upscale-for-automatic1111"
     "https://github.com/butaixianran/Stable-Diffusion-Webui-Civitai-Helper"
     "https://github.com/Bing-su/adetailer"
+	"https://github.com/DominikDoom/a1111-sd-webui-tagcomplete"
 )
 
 CHECKPOINT_MODELS=(
