@@ -36,28 +36,17 @@ CHECKPOINT_MODELS=(
     # Hassaku XL
     #"https://civitai.com/api/download/models/575495?type=Model&format=SafeTensor&size=pruned&fp=bf16"
     # Illustrious-XL 0.1
-    "https://civitai.com/api/download/models/889818?type=Model&format=SafeTensor&size=pruned&fp=fp16"
+    #"https://civitai.com/api/download/models/889818?type=Model&format=SafeTensor&size=pruned&fp=fp16"
     # noob ai pred 1.0
-    "https://civitai.com/api/download/models/1022833?type=Model&format=SafeTensor&size=full&fp=fp16"
+    #"https://civitai.com/api/download/models/1022833?type=Model&format=SafeTensor&size=full&fp=fp16"
     # NTR MIX XIII
     "https://civitai.com/api/download/models/1166878?type=Model&format=SafeTensor&size=pruned&fp=fp16"
 	# Obsession (Illustrious-XL)
-	"https://civitai.com/api/download/models/1136462?type=Model&format=SafeTensor&size=pruned&fp=fp16"
+	#"https://civitai.com/api/download/models/1136462?type=Model&format=SafeTensor&size=pruned&fp=fp16"
 )
 
 LORA_MODELS=(
-    # NAXX IL
-    "https://civitai.com/api/download/models/1250658?type=Model&format=SafeTensor"
-    # 朝凪 IL
-    "https://civitai.com/api/download/models/1186504?type=Model&format=SafeTensor"
-    # nyalia IL
-    "https://civitai.com/api/download/models/1123781?type=Model&format=SafeTensor"
-    # Bishoujo Mangekyou IL
-    "https://civitai.com/api/download/models/521833?type=Model&format=SafeTensor"
-    # anmi IL
-    "https://civitai.com/api/download/models/1021992?type=Model&format=SafeTensor"
-	# WLOP IL
-	"https://civitai.com/api/download/models/1276600?type=Model&format=SafeTensor"
+
 )
 
 VAE_MODELS=(
