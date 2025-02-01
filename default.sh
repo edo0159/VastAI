@@ -25,39 +25,18 @@ EXTENSIONS=(
     "https://github.com/AlUlkesh/stable-diffusion-webui-images-browser"
     "https://github.com/hako-mikan/sd-webui-regional-prompter"
     "https://github.com/Coyote-A/ultimate-upscale-for-automatic1111"
-    "https://github.com/butaixianran/Stable-Diffusion-Webui-Civitai-Helper"
     "https://github.com/Bing-su/adetailer"
 	"https://github.com/DominikDoom/a1111-sd-webui-tagcomplete"
 )
 
 CHECKPOINT_MODELS=(
-    #"https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/v1-5-pruned-emaonly.ckpt"
-    #"https://huggingface.co/stabilityai/stable-diffusion-2-1/resolve/main/v2-1_768-ema-pruned.ckpt"
-    # Hassaku XL
-    #"https://civitai.com/api/download/models/575495?type=Model&format=SafeTensor&size=pruned&fp=bf16"
-    # Illustrious-XL 0.1
-    "https://civitai.com/api/download/models/889818?type=Model&format=SafeTensor&size=pruned&fp=fp16"
-    # noob ai pred 1.0
-    "https://civitai.com/api/download/models/1022833?type=Model&format=SafeTensor&size=full&fp=fp16"
-    # NTR MIX XIII
-    "https://civitai.com/api/download/models/1166878?type=Model&format=SafeTensor&size=pruned&fp=fp16"
-	# Obsession (Illustrious-XL)
-	"https://civitai.com/api/download/models/1136462?type=Model&format=SafeTensor&size=pruned&fp=fp16"
+	# boleromix(Pony)
+	"https://civitai.com/api/download/models/1156233?type=Model&format=SafeTensor&size=full&fp=fp16"
 )
 
 LORA_MODELS=(
-    # NAXX IL
-    "https://civitai.com/api/download/models/1250658?type=Model&format=SafeTensor"
-    # 朝凪 IL
-    "https://civitai.com/api/download/models/1186504?type=Model&format=SafeTensor"
-    # nyalia IL
-    "https://civitai.com/api/download/models/1123781?type=Model&format=SafeTensor"
-    # Bishoujo Mangekyou IL
-    "https://civitai.com/api/download/models/521833?type=Model&format=SafeTensor"
-    # anmi IL
-    "https://civitai.com/api/download/models/1021992?type=Model&format=SafeTensor"
 	# WLOP IL
-	"https://civitai.com/api/download/models/1276600?type=Model&format=SafeTensor"
+	#"https://civitai.com/api/download/models/1276600?type=Model&format=SafeTensor"
 )
 
 VAE_MODELS=(
@@ -73,7 +52,7 @@ ESRGAN_MODELS=(
 )
 
 CONTROLNET_MODELS=(
-    #"https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/diffusers_xl_canny_mid.safetensors"
+    "https://huggingface.co/2vXpSwA7/iroiro-lora/resolve/main/test_controlnet2/CN-anytest_v3-50000_pn_dim256.safetensors"
     #"https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/diffusers_xl_depth_mid.safetensors?download"
     #"https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/t2i-adapter_diffusers_xl_openpose.safetensors"
     #"https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_canny-fp16.safetensors"
