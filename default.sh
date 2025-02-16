@@ -316,5 +316,7 @@ nohup unison -ui text "$PROFILE_FILE" > "$LOG_FILE" 2>&1 &
 echo "Unisonがバックグラウンドで起動しました。ログは $LOG_FILE をご確認ください。"
 }
 
-provisioning_start
-SetupStartSync
+provisioning_start &
+SetupStartSync &
+
+wait
