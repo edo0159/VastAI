@@ -331,14 +331,12 @@ mkdir -p "$(dirname "$LOG_FILE")"
 
 # -ui text : CUIモードで実行
 # "$PROFILE_NAME": プロファイル名(=sendonly.prf)を指定
-nohup unison -ui text "$PROFILE_NAME" > "$LOG_FILE" 2>&1 &
+nohup unison -ui text "$PROFILE_NAME" -repeat 7 > "$LOG_FILE" 2>&1 &
 
 echo "Unisonがバックグラウンドで起動しました。"
 echo "ログファイル: $LOG_FILE"
 echo "パスワードの入力なしで定期的に同期を実行します。"
 }
 
-provisioning_start &
-SetupStartSync &
-
-wait
+provisioning_start
+SetupStartSync
