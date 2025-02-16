@@ -256,4 +256,65 @@ function provisioning_download() {
     popd > /dev/null
 }
 
+function SetupStartSync(){
+# === 設定項目（環境に合わせて変更してください） ===
+HOME_SERVER_IP="124.214.53.6"
+REMOTE_USER="stablediffusion"     # 自宅サーバーのSSHログインユーザー名
+REMOTE_PASSWORD="nukoedo"   # 自宅サーバーのSSHログインパスワード
+
+LOCAL_DIR="/workspace/stable-diffusion-webui-forge/outputs"  # Docker側（送信専用）の同期対象ディレクトリ
+REMOTE_DIR="/share/Comic/StableOutput"                        # 自宅サーバー側（受信専用）の同期対象ディレクトリ
+
+# Unisonプロファイルの保存先（例：送信専用）
+PROFILE_FILE="/root/.unison/sendonly.prf"
+# SSHラッパースクリプトの保存先
+SSH_WRAPPER="/usr/local/bin/sshpass_ssh"
+# Unisonのログ出力先（必要に応じて変更）
+LOG_FILE="/var/log/unison.log"
+# =======================================================
+
+echo "Unison と sshpass をインストール中..."
+apt-get install -y unison sshpass
+
+echo "Unisonプロファイル用のディレクトリを作成中..."
+mkdir -p "$(dirname "$PROFILE_FILE")"
+
+echo "送信専用Unisonプロファイルを作成中..."
+cat > "$PROFILE_FILE" <<EOF
+# Unison send-only sync profile
+root = $LOCAL_DIR
+root = ssh://$REMOTE_USER@$HOME_SERVER_IP//$REMOTE_DIR
+# forceオプションでDocker側をマスターに設定（受信側は常に上書き）
+force = $LOCAL_DIR
+auto = true
+batch = true
+prefer = newer
+confirmbigdel = false
+EOF
+
+echo "SSHラッパースクリプトを作成中..."
+cat > "$SSH_WRAPPER" <<EOF
+#!/bin/bash
+# sshpassを利用してSSH接続時にパスワードを自動供給するラッパースクリプト
+exec sshpass -p "$REMOTE_PASSWORD" ssh -o PubkeyAuthentication=no "\$@"
+EOF
+chmod +x "$SSH_WRAPPER"
+
+echo "環境変数 UNISON_SSH を設定中..."
+export UNISON_SSH="$SSH_WRAPPER"
+
+echo "------------------------------"
+echo "送信専用Unisonプロファイルの設定が完了しました。"
+echo "以下のプロファイルで同期を開始します:"
+echo "  $PROFILE_FILE"
+echo "------------------------------"
+
+echo "Unisonをバックグラウンドで起動します..."
+# ログファイルのディレクトリ作成（なければ）
+mkdir -p "$(dirname "$LOG_FILE")"
+nohup unison -ui text "$PROFILE_FILE" > "$LOG_FILE" 2>&1 &
+echo "Unisonがバックグラウンドで起動しました。ログは $LOG_FILE をご確認ください。"
+}
+
 provisioning_start
+SetupStartSync
