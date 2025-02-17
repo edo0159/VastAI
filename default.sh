@@ -280,16 +280,18 @@ LOG_FILE="/var/log/unison.log"
 # ここからスクリプト本体
 ############################################
 echo "パッケージリストを更新中..."
-apt-get update
+sudo apt-get update
 
 echo "Unison と sshpass をインストール中..."
-apt-get install -y unison sshpass
+sudo apt-get install -y unison sshpass
+
+sleep 2
 
 echo "Unisonプロファイル用のディレクトリを作成中..."
-mkdir -p "$(dirname "$PROFILE_FILE")"
+sudo mkdir -p "$(dirname "$PROFILE_FILE")"
 
 echo "SSHラッパースクリプトを作成中: $SSH_WRAPPER"
-cat > "$SSH_WRAPPER" <<EOF
+sudo tee "$SSH_WRAPPER" > /dev/null <<EOF
 #!/bin/bash
 exec sshpass -p "$REMOTE_PASSWORD" ssh \\
   -o PreferredAuthentications=password \\
@@ -299,10 +301,10 @@ exec sshpass -p "$REMOTE_PASSWORD" ssh \\
   -o UserKnownHostsFile=/dev/null "\$@"
 EOF
 
-chmod +x "$SSH_WRAPPER"
+sudo chmod +x "$SSH_WRAPPER"
 
-echo "送信専用Unisonプロファイルを作成中: $PROFILE_FILE"
-cat > "$PROFILE_FILE" <<EOF
+sudo echo "送信専用Unisonプロファイルを作成中: $PROFILE_FILE"
+sudo tee "$PROFILE_FILE" > /dev/null <<EOF
 # Unison send-only sync profile
 root = $LOCAL_DIR
 root = ssh://$REMOTE_USER@$HOME_SERVER_IP:$REMOTE_PORT//$REMOTE_DIR
@@ -327,11 +329,13 @@ echo "  $PROFILE_FILE"
 echo "------------------------------"
 
 echo "Unisonをバックグラウンドで起動します..."
-mkdir -p "$(dirname "$LOG_FILE")"
+sudo mkdir -p "$(dirname "$LOG_FILE")"
+
+sudo chmod +x "$LOG_FILE"
 
 # -ui text : CUIモードで実行
 # "$PROFILE_NAME": プロファイル名(=sendonly.prf)を指定
-nohup unison -ui text "$PROFILE_NAME" -repeat 7 > "$LOG_FILE" 2>&1 &
+nohup sudo unison -ui text "$PROFILE_NAME" -repeat 7 > "$LOG_FILE" 2>&1 &
 
 echo "Unisonがバックグラウンドで起動しました。"
 echo "ログファイル: $LOG_FILE"
