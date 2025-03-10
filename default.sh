@@ -256,4 +256,42 @@ function provisioning_download() {
     popd > /dev/null
 }
 
+download_and_process() {
+    # notes_v2.safetensors のダウンロードと移動
+    echo "Downloading notes_v2.safetensors..."
+    wget --no-check-certificate 'https://docs.google.com/uc?export=download&id=17MrClbWMnYGmW4yeSt2B7i2rpy8xBmTE' -O notes_v2.safetensors
+    if [ $? -ne 0 ]; then
+        echo "Failed to download notes_v2.safetensors"
+        exit 1
+    fi
+
+	mkdir /workspace/storage/stable_diffusion/models/lora/
+    echo "Moving notes_v2.safetensors to /workspace/storage/stable_diffusion/models/lora/"
+    mv notes_v2.safetensors /workspace/storage/stable_diffusion/models/lora/ || { echo "Move failed"; exit 1; }
+
+    # wildcards.zip のダウンロードと展開、コピー
+    echo "Downloading wildcards.zip..."
+    wget --no-check-certificate 'https://docs.google.com/uc?export=download&id=17NL55KSgIi2FdmaziAsUaxs722FP08ni' -O wildcards.zip
+    if [ $? -ne 0 ]; then
+        echo "Failed to download wildcards.zip"
+        exit 1
+    fi
+
+    echo "Unzipping wildcards.zip..."
+    unzip wildcards.zip -d wildcards_tmp || { echo "Unzip failed"; exit 1; }
+
+    echo "Copying extracted files to /workspace/share/wildcards/"
+    cp -r wildcards_tmp/* /workspace/share/wildcards/ || { echo "Copy to /workspace/share/wildcards/ failed"; exit 1; }
+
+    echo "Copying extracted files to /workspace/stable-diffusion-webui-forge/extensions/sd-dynamic-prompts/"
+    cp -r wildcards_tmp/* /workspace/stable-diffusion-webui-forge/extensions/sd-dynamic-prompts/ || { echo "Copy to /workspace/stable-diffusion-webui-forge/extensions/sd-dynamic-prompts/ failed"; exit 1; }
+
+    # 不要な一時ファイルの削除
+    echo "Cleaning up temporary files..."
+    rm -rf wildcards.zip wildcards_tmp
+
+    echo "All tasks completed successfully."
+}
+
 provisioning_start
+download_and_process
